@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 import { PersonService, ProductService } from "../controller/index.js";
 
+router.get("/list/:id", ProductService.findOne);
 router.post("/register", PersonService.register);
 router.post("/login", PersonService.login);
 

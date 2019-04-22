@@ -3,12 +3,18 @@ import { Person, Product } from "../model";
 class ProductService {
   static async addProduct(req, res, next) {
     try {
-      const addProduct = await Product.create({
-        productName: req.body.productName,
-        stock: req.body.stock,
-        category: req.body.category
-      });
-      res.status(201).json(addProduct);
+      if (req.file && req.file.gcsUrl) {
+        const addProduct = await Product.create({
+          productName: req.body.productName,
+          stock: req.body.stock,
+          desc: req.body.desc,
+          price: req.body.price,
+          image: req.file.gcsUrl
+        });
+        res.status(201).json(addProduct);
+      } else {
+        next();
+      }
     } catch (e) {
       next(e);
     }
@@ -40,6 +46,19 @@ class ProductService {
         { runValidators: true }
       );
       res.status(200).json(editable);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async findOne(req, res, next) {
+    try {
+      const find = await Product.findOne({ _id: req.params.id });
+      if (!find) {
+        res.status(400).json({ error: `can't found any` });
+      } else {
+        res.status(200).json(find);
+      }
     } catch (e) {
       next(e);
     }

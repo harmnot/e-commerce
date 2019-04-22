@@ -44,8 +44,7 @@ describe("PRODUCT TESTING", function() {
 
   let obj = {
     productName: "Laptop",
-    stock: 100,
-    category: "Computer"
+    stock: 100
   };
   describe("POST --add_product by ADMIN", function() {
     it("tring to add product and succesfully with status code [ 201 ]", function(done) {
@@ -60,12 +59,10 @@ describe("PRODUCT TESTING", function() {
           expect(res.body).to.be.an("object");
           expect(res.body).to.have.property("productName");
           expect(res.body).to.have.property("stock");
-          expect(res.body).to.have.property("category");
           expect(res.body.productName).to.be.a("string");
           expect(res.body.stock).to.be.a("number");
           expect(res.body.stock).not.to.be.null;
           expect(res.body.stock).to.be.above(0);
-          expect(res.body.category).to.be.a("array");
           done();
         });
     });

@@ -57,7 +57,11 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    default: "user"
+    default: "customer"
+  },
+  money: {
+    type: Number,
+    default: 0
   }
 });
 

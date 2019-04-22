@@ -6,10 +6,12 @@ import morgan from "morgan";
 const app = express();
 const port = process.env.PORT || 3000;
 const NODE_ENV = process.env.NODE_ENV || "development";
-// import Product from "./model/productSchema";
+
 import { Person, Product } from "./model/index.js";
 import product from "./routes/product_routes.js";
 import user from "./routes/user_routes";
+import cart from "./routes/cart.js";
+import checkout from "./routes/checkout.js";
 
 const uri = `mongodb+srv://${process.env.MONGO_DB_NAME}:${
   process.env.MONGO_DB_KEY
@@ -27,10 +29,21 @@ mongoose
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true
+  })
+);
 app.use(morgan("tiny"));
 
 app.use("/api/admin", product);
 app.use("/api/user", user);
+app.use("/api/cart", cart);
+app.use("/api/checkout", checkout);
+
+app.listen(port, () => {
+  console.log(`you are connected on PORT : localhost:${port}`);
+});
 
 export default app;

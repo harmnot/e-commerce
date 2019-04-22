@@ -41,7 +41,8 @@ export default class PersonService {
             role: tryingLogin.role,
             username: tryingLogin.username
           });
-          res.status(200).json({ msg: `success to login`, token });
+          console.log(tryingLogin, "ini akun login");
+          res.status(200).json({ msg: `success to login`, token, tryingLogin });
         }
       }
     } catch (e) {

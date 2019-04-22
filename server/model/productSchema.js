@@ -12,8 +12,8 @@ const productSchema = new Schema(
       type: Number,
       required: [true, "please fill how many stock you want to put"]
     },
-    category: {
-      type: Array
+    desc: {
+      type: String
     },
     price: {
       type: Number
