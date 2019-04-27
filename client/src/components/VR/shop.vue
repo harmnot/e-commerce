@@ -60,6 +60,9 @@
         </b-col>
       </b-row>
     </b-container>
+
+    <ProductHere :list="list" />
+
     <!-- <b-row class="p-2 m-2">
       <b-card-group deck>
         <b-card
@@ -109,43 +112,43 @@ export default {
           });
         });
     },
-    addcart(val) {
-      if (localStorage.getItem('token')) {
-        const token = {
-          token: localStorage.getItem('token'),
-        };
-        const obj = {
-          item: val.id,
-          amount: 1,
-        };
-        this.$axios
-          .post(
-            '/api/cart/addcart',
-            {
-              item: val.id,
-              amount: 1,
-            },
-            {
-              headers: token,
-            },
-          )
-          .then(({ data }) => {
-            Eventbus.$emit('addcart', { data: data, price: val.price });
-            this.$swal.fire({
-              type: 'success',
-              text: `add to cart`,
-            });
-          })
-          .catch(err => {
-            this.$swal.fire({
-              type: 'error',
-              text: err.response.data.error,
-            });
-          });
-      } else {
-        this.$router.replace({ path: '/login' });
-      }
-    },
+    // addcart(val) {
+    //   if (localStorage.getItem('token')) {
+    //     const token = {
+    //       token: localStorage.getItem('token'),
+    //     };
+    //     const obj = {
+    //       item: val.id,
+    //       amount: 1,
+    //     };
+    //     this.$axios
+    //       .post(
+    //         '/api/cart/addcart',
+    //         {
+    //           item: val.id,
+    //           amount: 1,
+    //         },
+    //         {
+    //           headers: token,
+    //         },
+    //       )
+    //       .then(({ data }) => {
+    //         Eventbus.$emit('addcart', { data: data, price: val.price });
+    //         this.$swal.fire({
+    //           type: 'success',
+    //           text: `add to cart`,
+    //         });
+    //       })
+    //       .catch(err => {
+    //         this.$swal.fire({
+    //           type: 'error',
+    //           text: err.response.data.error,
+    //         });
+    //       });
+    //   } else {
+    //     this.$router.replace({ path: '/login' });
+    //   }
+    // },
   },
   mounted() {
     if (localStorage.getItem('role') == 'admin') {

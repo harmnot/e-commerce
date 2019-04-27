@@ -2,6 +2,7 @@ const { storage, getPublicUrl } = require("../helper/google-cloud-storage.js");
 const DEFAULT_BUCKET_NAME = process.env.bucket;
 
 exports.sendUploadToGCS = (req, res, next) => {
+  console.log(req.file, "iniii file");
   if (!req.file) {
     return next();
   }
@@ -18,6 +19,7 @@ exports.sendUploadToGCS = (req, res, next) => {
   });
 
   stream.on("error", err => {
+    console.log(err, "ini error");
     req.file.cloudStorageError = err;
     next(err);
   });

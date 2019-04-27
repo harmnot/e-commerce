@@ -16,6 +16,7 @@ class ProductService {
         next();
       }
     } catch (e) {
+      console.log(e, "ini error");
       next(e);
     }
   }

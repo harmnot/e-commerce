@@ -43,6 +43,7 @@ router.delete(
 // router.delete("/delete/:id", ProductService.deleteProduct);
 
 router.use((err, req, res, next) => {
+  console.log(err, "iniiii error");
   if (err) {
     res.status(500).json({ error: err.message });
   }
