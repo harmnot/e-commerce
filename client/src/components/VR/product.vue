@@ -9,7 +9,6 @@
         </b-card>
         <b-col>
           <div class="thiscaption my-4 p-2">
-            <!-- <b-nav-item class="p-2" > Login</b-nav-item> -->
             <b-link :to="`/product/${product._id}`">
               <h4>{{ product.productName }}</h4>
             </b-link>

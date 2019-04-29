@@ -61,30 +61,7 @@
       </b-row>
     </b-container>
 
-    <ProductHere :list="list" />
-
-    <!-- <b-row class="p-2 m-2">
-      <b-card-group deck>
-        <b-card
-          v-for="(product, index) in list"
-          :key="product._id"
-          :title="product.productName"
-          :img-src="product.image"
-          img-alt="Image"
-          img-top
-        >
-          <b-card-text>
-            This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.
-          </b-card-text>
-
-          <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
-        </b-card>
-      </b-card-group>
-    </b-row> -->
-    <!-- <b-col sm="6" v-for="(product, index) in list" :key="product._id">
-        <b-img :src="product.image" fluid></b-img>
-      </b-col> -->
+    <!-- <ProductHere :list="list" /> -->
   </b-container>
 </template>
 
@@ -112,43 +89,43 @@ export default {
           });
         });
     },
-    // addcart(val) {
-    //   if (localStorage.getItem('token')) {
-    //     const token = {
-    //       token: localStorage.getItem('token'),
-    //     };
-    //     const obj = {
-    //       item: val.id,
-    //       amount: 1,
-    //     };
-    //     this.$axios
-    //       .post(
-    //         '/api/cart/addcart',
-    //         {
-    //           item: val.id,
-    //           amount: 1,
-    //         },
-    //         {
-    //           headers: token,
-    //         },
-    //       )
-    //       .then(({ data }) => {
-    //         Eventbus.$emit('addcart', { data: data, price: val.price });
-    //         this.$swal.fire({
-    //           type: 'success',
-    //           text: `add to cart`,
-    //         });
-    //       })
-    //       .catch(err => {
-    //         this.$swal.fire({
-    //           type: 'error',
-    //           text: err.response.data.error,
-    //         });
-    //       });
-    //   } else {
-    //     this.$router.replace({ path: '/login' });
-    //   }
-    // },
+    addcart(val) {
+      if (localStorage.getItem('token')) {
+        const token = {
+          token: localStorage.getItem('token'),
+        };
+        const obj = {
+          item: val.id,
+          amount: 1,
+        };
+        this.$axios
+          .post(
+            '/api/cart/addcart',
+            {
+              item: val.id,
+              amount: 1,
+            },
+            {
+              headers: token,
+            },
+          )
+          .then(({ data }) => {
+            Eventbus.$emit('addcart', { data: data, price: val.price });
+            this.$swal.fire({
+              type: 'success',
+              text: `add to cart`,
+            });
+          })
+          .catch(err => {
+            this.$swal.fire({
+              type: 'error',
+              text: err.response.data.error,
+            });
+          });
+      } else {
+        this.$router.replace({ path: '/login' });
+      }
+    },
   },
   mounted() {
     if (localStorage.getItem('role') == 'admin') {
@@ -158,9 +135,7 @@ export default {
   created() {
     this.getProducts();
   },
-  updated() {
-    // this.getProducts();
-  },
+  updated() {},
 };
 </script>
 

@@ -57,7 +57,6 @@ export default {
         });
     },
     gosend(id) {
-      // console.log(id);
       this.$axios
         .put('/api/checkout/update/' + id, {
           status: true,

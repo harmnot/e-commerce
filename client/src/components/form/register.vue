@@ -14,7 +14,6 @@
 
       <b-col md="4" offset-md="2">
         <b-form @submit.prevent="goRegister">
-          <!-- <label for="feedback-user">username</label> -->
           <b-input v-model="username" placeholder="enter your username"></b-input>
           <b-form-invalid-feedback :state="usernameState">
             enter valid username
@@ -23,7 +22,6 @@
             Looks Good.
           </b-form-valid-feedback>
 
-          <!-- <label for="feedback-user">email</label> -->
           <b-input v-model="email" id="feedback-user" placeholder="enter your email"></b-input>
           <b-form-invalid-feedback :state="emailState">
             enter a valid email address
@@ -54,15 +52,12 @@
             Looks Good.
           </b-form-valid-feedback>
 
-          <!-- <label for="feedback-user">gender</label> -->
-
           <b-form-radio-group
             v-model="selected"
             :options="options"
             name="radio-inline"
           ></b-form-radio-group>
 
-          <!-- <label for="feedback-user">address</label> -->
           <b-input v-model="address" placeholder="enter your address"></b-input>
           <b-form-invalid-feedback :state="addressState">
             enter your address
@@ -71,7 +66,6 @@
             Looks Good.
           </b-form-valid-feedback>
 
-          <!-- <label for="feedback-user">phone</label> -->
           <b-input v-model="phone" placeholder="enter your phone number"></b-input>
           <b-form-invalid-feedback :state="phoneState">
             enter your us phone

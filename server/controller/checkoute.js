@@ -14,7 +14,7 @@ class GoCheckout {
         },
         { $push: { order: { $each: req.body.orders } } }
       );
-      console.log(updateAgain, "updated");
+
       res.status(200).json(updateAgain);
     } catch (e) {
       next(e);
@@ -34,21 +34,19 @@ class GoCheckout {
   }
 
   static async find(req, res, next) {
-    console.log(req.params.status);
     let check;
     if (req.params.status == "true") {
       check = true;
     } else {
       check = false;
     }
-    console.log(check, "ini check");
+
     try {
       const getOne = await Checkout.find({
         paid: check
       });
       res.status(200).json(getOne);
     } catch (e) {
-      console.log(e, "ini error");
       next(e);
     }
   }
@@ -63,7 +61,7 @@ class GoCheckout {
     try {
       const token = req.header("token");
       const user = verifyJwt(token);
-      console.log(user, "ini decoded");
+
       const getOne = await Checkout.find({
         user: user._id,
         paid: check
@@ -74,7 +72,6 @@ class GoCheckout {
         res.status(200).json(getOne);
       }
     } catch (e) {
-      console.log(e, "ini error");
       next(e);
     }
   }

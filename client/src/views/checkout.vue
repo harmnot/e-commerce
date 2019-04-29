@@ -10,7 +10,6 @@
         </b-col>
         <b-col class="border">
           <span> {{ amount[index].amount }}</span>
-          <!-- <span> {{ item.amount }}</span> -->
         </b-col>
       </b-row>
       <b-row class="p-2">
@@ -20,7 +19,6 @@
         <b-col>
           <b-form-textarea placeholder="enter address" v-model="address" required>
           </b-form-textarea>
-          <!-- haha -->
         </b-col>
       </b-row>
       <b-row class="p-2">
@@ -102,10 +100,8 @@ export default {
           for (let getidorderan of list) {
             this.itemsID.push(getidorderan._id);
           }
-          console.log(this.itemsID, 'ini id');
         })
         .catch(err => {
-          console.log(err, 'ini error');
           this.$swal.fire({
             type: 'error',
             text: err.response.data.errror,
@@ -113,34 +109,40 @@ export default {
         });
     },
     updated() {
-      const address = {
-        address: this.address,
-        paid: 'true',
-      };
-      this.$axios
-        .put('/api/checkout/update/' + this.id, address, {
-          headers: {
-            token: localStorage.getItem('token'),
-          },
-        })
-        .then(({ data }) => {
-          Eventbus.$emit('alreadypaid', { cart: [], total: 0 });
-          Eventbus.$emit('showcart', true);
-          console.log(data);
-          this.$swal.fire({
-            type: 'success',
-            text: 'successfully to pay, please wait the items arrive soon',
-          });
-          this.$router.push('/');
-          this.updatedPaid();
-        })
-        .catch(err => {
-          console.log(err, 'ininerror');
-          this.$swal.fire({
-            type: 'error',
-            text: err.response.data.error,
-          });
+      if (this.address.length <= 10 || !this.address) {
+        this.$swal.fire({
+          type: 'error',
+          text: 'please enter valid address',
         });
+      } else {
+        const address = {
+          address: this.address,
+          paid: 'true',
+        };
+        this.$axios
+          .put('/api/checkout/update/' + this.id, address, {
+            headers: {
+              token: localStorage.getItem('token'),
+            },
+          })
+          .then(({ data }) => {
+            Eventbus.$emit('alreadypaid', { cart: [], total: 0 });
+            Eventbus.$emit('showcart', true);
+
+            this.$swal.fire({
+              type: 'success',
+              text: 'successfully to pay, please wait the items arrive soon',
+            });
+            this.$router.push('/');
+            this.updatedPaid();
+          })
+          .catch(err => {
+            this.$swal.fire({
+              type: 'error',
+              text: err.response.data.error,
+            });
+          });
+      }
     },
     updatedPaid() {
       const items = {
@@ -165,10 +167,6 @@ export default {
   },
   mounted() {
     this.getAll();
-    // Eventbus.$on('checkout', payload => {
-    //   this.total = payload.total;
-    //   this.items = payload.item;
-    // });
   },
 };
 </script>

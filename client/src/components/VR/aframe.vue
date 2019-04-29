@@ -25,14 +25,8 @@
           ></b-carousel-slide>
         </b-carousel>
       </b-col>
-      <!-- </div> -->
     </b-row>
-    <!-- two -->
-    <!-- <a-box
-    position="0.5 1 -2"
-    material="src:https://storage.googleapis.com/new-bucket-project/1555486787268-texture.jpg"
-  >
-  </a-box>  -->
+
     <b-row>
       <b-col cols="6" class="aframe">
         <a-scene embedded look-controls-enabled="false" vr-mode-ui="enabled: false">

@@ -39,10 +39,7 @@
               </b-row>
             </b-container>
 
-            <b-col sm="6">
-              shipping: ${{ cart.length * 8 }}<br />
-              <!-- <b>total: ${{ total }}</b> -->
-            </b-col>
+            <b-col sm="6"> shipping: ${{ cart.length * 8 }}<br /> </b-col>
             <b-col sm="6 my-2">
               <b>total: ${{ total + cart.length * 8 }}</b>
             </b-col>
@@ -62,7 +59,7 @@
           <label> NOTE: each bin weights <b>15lbs</b>, all ship cost <b>$8</b></label>
         </div>
       </b-modal>
-      <!-- <router-link to="/register"> register</router-link> -->
+
       <div class="d-flex flex-row" v-if="isLogin || login">
         <b-nav-item class="p-2" to="/login"> Login</b-nav-item>
         <b-nav-item class="p-2" to="/register"> Register </b-nav-item>
@@ -150,7 +147,6 @@ export default {
           this.loader = true;
         })
         .catch(err => {
-          console.log(err.response, ` error disini dan ini ${val.id}`);
           this.loader = true;
           this.$swal.fire({
             type: 'error',
@@ -181,12 +177,12 @@ export default {
           this.checkOUT = false;
           this.$refs['my-modal'].hide();
           this.isCheckout = false;
-          console.log(data);
+
           this.$router.push('/checkout');
         })
         .catch(err => {
           this.checkOUT = false;
-          console.log(err.response);
+
           this.$swal.fire({
             type: 'error',
             text: err.response.data.error,
@@ -207,7 +203,6 @@ export default {
         })
         .then(({ data }) => {
           this.status = data;
-          console.log(data, 'list user');
         })
         .catch(err => {
           console.log(err.response);

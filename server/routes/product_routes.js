@@ -14,21 +14,21 @@ const multer = Multer({
 });
 
 router.get("/listproducts", ProductService.listproducts);
-// router.post(
-//   "/addproduct",
-//   authentic,
-//   auhthorization,
-//   multer.single("image"),
-//   gcsMiddlewares.sendUploadToGCS,
-//   ProductService.addProduct
-// );
-
 router.post(
   "/addproduct",
+  authentic,
+  auhthorization,
   multer.single("image"),
   gcsMiddlewares.sendUploadToGCS,
   ProductService.addProduct
 );
+
+// router.post(
+//   "/addproduct",
+//   multer.single("image"),
+//   gcsMiddlewares.sendUploadToGCS,
+//   ProductService.addProduct
+// );
 
 router.put("/update/:id", authentic, auhthorization, ProductService.updated);
 // router.put("/update/:id", ProductService.updated);

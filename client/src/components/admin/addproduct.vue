@@ -1,6 +1,5 @@
 <template lang="html">
   <b-form id="formaddproduct" @submit.prevent="addProduct">
-    <!-- <input type="text" name="" value="" v-model="formProduct.productName" /> -->
     <b-row class="my-4" v-for="(type, index) in types" :key="index">
       <b-col sm="3">
         <label :for="`type-${type[0]}`"> {{ type[1] }}:</label>

@@ -67,7 +67,6 @@ export default {
         });
     },
     buy(val) {
-      console.log(val, 'ini');
       if (localStorage.getItem('token')) {
         const token = {
           token: localStorage.getItem('token'),
@@ -88,7 +87,6 @@ export default {
             },
           )
           .then(({ data }) => {
-            console.log(data, 'iniiiii');
             Eventbus.$emit('buythis', { data: data, price: val.price });
             this.$swal.fire({
               type: 'success',
@@ -96,7 +94,6 @@ export default {
             });
           })
           .catch(err => {
-            console.log(err.response, 'ini error');
             this.$swal.fire({
               type: 'error',
               text: err.response.data.error,

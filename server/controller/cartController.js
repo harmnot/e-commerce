@@ -39,7 +39,7 @@ class CartService {
       const token = req.header("token");
       const user = verifyJwt(token);
       const getPaid = await Cart.find({ user: user._id, paid: { $ne: true } });
-      console.log(getPaid, "iniiii");
+
       if (!getPaid.length) {
         res.status(204).json({ error: `can't found any` });
       } else {
@@ -75,8 +75,6 @@ class CartService {
       next(e);
     }
   }
-
-  // static async getAll(req, res, next)
 }
 
 export default CartService;
